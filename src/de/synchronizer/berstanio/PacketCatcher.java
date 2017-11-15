@@ -14,12 +14,12 @@ import org.bukkit.entity.Player;
 
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
-public class PacketCacher {
+public class PacketCatcher {
 
     private Player player;
     private Channel channel;
 
-    public PacketCacher(Player player) {
+    public PacketCatcher(Player player) {
         setPlayer(player);
     }
 

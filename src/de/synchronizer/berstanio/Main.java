@@ -29,7 +29,7 @@ public class Main extends JavaPlugin implements Listener{
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
-        new PacketCacher(event.getPlayer()).inject();
+        new PacketCatcher(event.getPlayer()).inject();
     }
 
     @Override
