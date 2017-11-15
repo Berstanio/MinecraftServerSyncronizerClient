@@ -61,7 +61,7 @@ public class Main extends JavaPlugin implements Listener{
     @EventHandler
     public void onMove(PlayerMoveEvent event){//2 Shchaden 3 tot
         Player player = event.getPlayer();
-        new MyPlayer(player.getName(), player.getLocation(),null, (float) player.getHealth(), WorldSettings.EnumGamemode.NOT_SET, 10, 10);
+        Utils.sendeMessageAnServer(new MyPlayer(player.getName(), player.getLocation(),null, (float) player.getHealth(), WorldSettings.EnumGamemode.NOT_SET, 10, 10));
     }
 
 
@@ -69,13 +69,13 @@ public class Main extends JavaPlugin implements Listener{
     public void onDamage(EntityDamageEvent event){//2 Shchaden 3 tot
         assert event.getEntity() instanceof Player;
         Player player = (Player) event.getEntity();
-        new MyPlayer(player.getName(), player.getLocation(),null, (float) player.getHealth(), WorldSettings.EnumGamemode.NOT_SET, 1, 2);
+        Utils.sendeMessageAnServer(new MyPlayer(player.getName(), player.getLocation(),null, (float) player.getHealth(), WorldSettings.EnumGamemode.NOT_SET, 1, 2));
     }
 
     @EventHandler
     public void onAnimation(PlayerAnimationEvent event){//2 Shchaden 3 tot
         Player player = event.getPlayer();
-        new MyPlayer(player.getName(), player.getLocation(),null, (float) player.getHealth(), WorldSettings.EnumGamemode.NOT_SET, 0, 10);
+        Utils.sendeMessageAnServer(new MyPlayer(player.getName(), player.getLocation(),null, (float) player.getHealth(), WorldSettings.EnumGamemode.NOT_SET, 0, 10));
     }
 
 
