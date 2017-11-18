@@ -20,7 +20,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         System.out.println("Aktiviert!");
-
+        getServer().getPluginManager().registerEvents(new Events(), this);
     }
 
     @Override

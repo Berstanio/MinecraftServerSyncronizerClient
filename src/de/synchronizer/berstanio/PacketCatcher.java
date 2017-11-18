@@ -3,16 +3,13 @@ package de.synchronizer.berstanio;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
-
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import java.lang.reflect.Field;
+import java.util.List;
 
 public class PacketCatcher {
 
