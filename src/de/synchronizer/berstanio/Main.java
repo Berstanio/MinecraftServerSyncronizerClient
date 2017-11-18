@@ -23,8 +23,6 @@ public class Main extends JavaPlugin {
 
     }
 
-
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // TODO: 07.11.17 TESTEN!!!
