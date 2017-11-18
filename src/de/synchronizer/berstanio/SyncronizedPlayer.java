@@ -74,7 +74,6 @@ public class SyncronizedPlayer {
     public void updatePlayer(MyPlayer myPlayer){
         if (myPlayer.getAnimation() != 10){
             animation(myPlayer.getAnimation());
-            //PacketPlayOutEntity.PacketPlayOutRelEntityMove
         }
         if (myPlayer.getStatus() != 10){
             status(myPlayer.getStatus());
