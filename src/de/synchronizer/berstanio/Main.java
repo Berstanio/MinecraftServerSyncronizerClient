@@ -2,10 +2,12 @@ package de.synchronizer.berstanio;
 
 import de.berstanio.com.core.Creator;
 import de.berstanio.com.handling.Utils;
+import net.minecraft.server.v1_8_R3.ItemStack;
 import org.apache.commons.codec.digest.Md5Crypt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -49,8 +51,15 @@ public class Main extends JavaPlugin {
         return true;
     }
 
-
-
+    public static HashMap<Integer, ItemStack> convertPlayerToItemStackHashMap(Player player){
+        HashMap<Integer, ItemStack> itemStackHashMap = new HashMap<>();
+        itemStackHashMap.put(0, CraftItemStack.asNMSCopy(player.getItemInHand()));
+        itemStackHashMap.put(1, CraftItemStack.asNMSCopy(player.getInventory().getHelmet()));
+        itemStackHashMap.put(2, CraftItemStack.asNMSCopy(player.getInventory().getChestplate()));
+        itemStackHashMap.put(3, CraftItemStack.asNMSCopy(player.getInventory().getLeggings()));
+        itemStackHashMap.put(4, CraftItemStack.asNMSCopy(player.getInventory().getBoots()));
+        return itemStackHashMap;
+    }
 
     public ArrayList<SyncronizedPlayer> getSyncronizedPlayers() {
         return syncronizedPlayers;
