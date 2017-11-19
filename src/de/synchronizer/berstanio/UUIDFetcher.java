@@ -1,4 +1,5 @@
 package de.synchronizer.berstanio;
+
 import org.bukkit.Bukkit;
 
 import java.io.BufferedReader;
@@ -44,10 +45,10 @@ public class UUIDFetcher {
     public static String[] getSignituareAndValue(UUID uuid){
         String output = callURL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid.toString().replace("-","") + "?unsigned=false");
         StringBuilder stringBuilder = new StringBuilder();
-        readData(output, stringBuilder, 47 + "Berstanio".length()/*Bukkit.getPlayer(uuid).getName().length()*/ + uuid.toString().replace("-","").length());
+        readData(output, stringBuilder, 47 + Bukkit.getPlayer(uuid).getName().length() + uuid.toString().replace("-","").length());
         String signituare = stringBuilder.toString();
         stringBuilder = new StringBuilder();
-        readData(output, stringBuilder, 76 + "Berstanio".length()/*Bukkit.getPlayer(uuid).getName().length()*/ + uuid.toString().replace("-","").length() + signituare.length());
+        readData(output, stringBuilder, 76 + Bukkit.getPlayer(uuid).getName().length() + uuid.toString().replace("-","").length() + signituare.length());
         String value = stringBuilder.toString();
         String[] valueAndSignutare = new String[2];
         valueAndSignutare[0] = signituare;
