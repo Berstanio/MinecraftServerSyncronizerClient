@@ -109,9 +109,9 @@ public class SyncronizedPlayer {
     }
 
     public void changeSkin(){
-        // TODO: 08.11.17 UUIDFetcher mit JsonReader
-        String value = "eyJ0aW1lc3RhbXAiOjE1MTAxNjc1MTg3MjEsInByb2ZpbGVJZCI6IjdiNTUzZWZkMWRhMjQ1Mjk4ODc1NTAzODIwNjZjZWFiIiwicHJvZmlsZU5hbWUiOiJOeXFsYXpGYW4iLCJzaWduYXR1cmVSZXF1aXJlZCI6dHJ1ZSwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2FjNjY1YmY1ZjFhZWQ5NmVhZGJmOTJiOWFhYmJjYmUxNTczZWE5Nzg0Y2FmZTZiODVjYmQyYjRlNDIxM2MifX19";
-        String signature = "Eq4qHN/poEu4gjy0Clm/MHASB3W676UD56f9hq3aNe0Bj63Wu3bwc7px+qfQiXpBn9PjDWibQnxyngoG0EJr8/SMjeuFFhtmEyC4nLj/yOQMNkmMGw1Uhmj8cnzC56uEQyJ9N6/gro7/Cjqrn3SWPXyLkzO4pfqxJaNsrUay8OWrCJs6e95QxSJx2RT2ZThDbawi6XNZD7EMYsPXJRCp8UP+Zta2hJWhVYFhL/5u5fglJ43uhWpaRb2e6M+KIISFQkebOpa1ySZi39R/uX95sB11Jm1WIUOgzqGOi6qN/YAJJ31F5Ujy6CansHHXwzRoQrKYDCLIn/F15n3sbdTzw7/7bKnNmhQqjhewQAcnn8eRYlDXQXECQNJ1i28iypHjMZs+gsK827D+kfcHyjhlH7bm0kk1ypi3pVUPIFDmJuUIP27zGiJ/2RWXFyjAqk2p7OufZHMJZYZECBgh251fErbYElmDZPfSPbA+sWOCUwS7kRB/4NhPSvVBQ1PcFwrEv/OUxDtH5txHx2T0jN1Dg1t31UvorU0SqDXOlNRE6dQzNWWIRtsepRg9ogVJc3g3S++0BmOepLBftLlzFAEf+bD7ZH7A1MRgV168ssQau+Ik8bIMZarYk20w65yGMdUonRZdUPGQVTka1c7aZBsN25dk/uKFpr2Xgtmz6eb3v68=";
+        String[] strings = UUIDFetcher.getSignituareAndValue(UUIDFetcher.getUUID(getGameProfile().getName()));
+        String signature = strings[0];
+        String value = strings[1];
         getGameProfile().getProperties().put("textures", new Property("textures", value, signature));
     }
 

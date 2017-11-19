@@ -64,10 +64,10 @@ public class PacketCatcher {
     }
 
 
-    public void komischerSwitch(Packet packet){
+    /*public void komischerSwitch(Packet packet){
         String name = packet.getClass().getSimpleName();
         switch (name){
-            /*case "PacketPlayOutAbilities":{
+            case "PacketPlayOutAbilities":{
                 PacketPlayOutAbilities castedPacket = (PacketPlayOutAbilities) packet;
                 break;
             }
@@ -350,7 +350,7 @@ public class PacketCatcher {
             case "PacketPlayOutWorldParticles":{
                 PacketPlayOutWorldParticles castedPacket = (PacketPlayOutWorldParticles) packet;
                 break;
-            }*/
+            }
             case "PacketPlayInAbilities":{
                 PacketPlayInAbilities castedPacket = (PacketPlayInAbilities) packet;
                 break;
@@ -447,7 +447,7 @@ public class PacketCatcher {
                 break;
             }
         }
-    }
+    }*/
 
     public void setValue(Object obj, String name, Object value){
         try{
