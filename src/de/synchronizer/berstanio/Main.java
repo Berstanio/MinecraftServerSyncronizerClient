@@ -28,6 +28,7 @@ public class Main extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // TODO: 07.11.17 TESTEN!!!
+        // TODO: 19.11.17 Schaden und Potion Items etc 
         if (command.getName().equalsIgnoreCase("start")) {
             if (sender.hasPermission("synchronizer.start")) {
                 if (args.length == 5){

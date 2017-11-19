@@ -3,13 +3,21 @@ package de.synchronizer.berstanio;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
-import net.minecraft.server.v1_8_R3.*;
+import net.minecraft.server.v1_8_R3.Packet;
+import net.minecraft.server.v1_8_R3.WorldSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.lang.reflect.Field;
 import java.util.List;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class PacketCatcher {
 
@@ -44,15 +52,102 @@ public class PacketCatcher {
             for (SyncronizedPlayer syncronizedPlayer : ((Main)Bukkit.getPluginManager().getPlugin("Synchronizer")).getSyncronizedPlayers()) {
                 if (syncronizedPlayer.getEntityID() == entityID){
                     if (getValue(packet, "action").toString().equalsIgnoreCase("ATTACK")){
-                        if (getPlayer().getItemInHand().getType() != org.bukkit.Material.AIR){
-                            // TODO: 11.11.17 Schaden berechnen!
-                        }else {
-                            syncronizedPlayer.setLive(syncronizedPlayer.getLive() - (float) 0.5);
+                        // TODO: 11.11.17 Schaden berechnen!
+                        float armorBars = 0;
+                        float toughness = 0;
+                        float rawDamage;
+                        rawDamage = CraftItemStack.asNMSCopy(getPlayer().getItemInHand()).h();
+                        for (PotionEffect potionEffect : getPlayer().getActivePotionEffects()){
+                            if (potionEffect.getType() == PotionEffectType.INCREASE_DAMAGE){
+                                rawDamage += (3 * potionEffect.getAmplifier());
+                            }else if (potionEffect.getType() == PotionEffectType.WEAKNESS){
+                                rawDamage -= (4 * potionEffect.getAmplifier());
+                            }
                         }
-
+                        // TODO: 19.11.17 Hier noch Potion Effecte des Sncronizierten Spielers einfügen
+                        ItemStack helmet = CraftItemStack.asBukkitCopy(syncronizedPlayer.getItemStackHashMap().get(1));
+                        ItemStack chestplate = CraftItemStack.asBukkitCopy(syncronizedPlayer.getItemStackHashMap().get(2));
+                        ItemStack leggins = CraftItemStack.asBukkitCopy(syncronizedPlayer.getItemStackHashMap().get(3));
+                        ItemStack boots = CraftItemStack.asBukkitCopy(syncronizedPlayer.getItemStackHashMap().get(4));
+                        switch (helmet.getType().name().replace("_HELMET", "")){
+                            case "LEATHER":
+                                armorBars++;
+                                break;
+                            case "GOLD":
+                                armorBars += 2;
+                                break;
+                            case "CHAINMAIL":
+                                armorBars += 2;
+                                break;
+                            case "IRON":
+                                armorBars += 2;
+                                break;
+                            case "DIAMOND":
+                                armorBars += 3;
+                                toughness += 2;
+                                break;
+                        }
+                        switch (chestplate.getType().name().replace("_CHESTPLATE", "")){
+                            case "LEATHER":
+                                armorBars += 3;
+                                break;
+                            case "GOLD":
+                                armorBars += 5;
+                                break;
+                            case "CHAINMAIL":
+                                armorBars += 5;
+                                break;
+                            case "IRON":
+                                armorBars += 6;
+                                break;
+                            case "DIAMOND":
+                                armorBars += 8;
+                                toughness += 2;
+                                break;
+                        }
+                        switch (leggins.getType().name().replace("_LEGGINGS", "")){
+                            case "LEATHER":
+                                armorBars += 2;
+                                break;
+                            case "GOLD":
+                                armorBars += 3;
+                                break;
+                            case "CHAINMAIL":
+                                armorBars += 4;
+                                break;
+                            case "IRON":
+                                armorBars += 5;
+                                break;
+                            case "DIAMOND":
+                                armorBars += 6;
+                                toughness += 2;
+                                break;
+                        }
+                        switch (boots.getType().name().replace("_BOOTS", "")){
+                            case "LEATHER":
+                                armorBars += 1;
+                                break;
+                            case "GOLD":
+                                armorBars += 1;
+                                break;
+                            case "CHAINMAIL":
+                                armorBars += 1;
+                                break;
+                            case "IRON":
+                                armorBars += 2;
+                                break;
+                            case "DIAMOND":
+                                armorBars += 3;
+                                toughness += 2;
+                                break;
+                        }
+                        rawDamage = rawDamage * (1 - min(20, max(armorBars / 5, armorBars - rawDamage / (2 + toughness / 4))) / 25);
+                        // TODO: 19.11.17 Hier weiter machen
+                        syncronizedPlayer.setLive(syncronizedPlayer.getLive() - rawDamage);
                         syncronizedPlayer.animation(1);
                         syncronizedPlayer.status(2);
                         if (syncronizedPlayer.getLive() <= 0){
+                            // TODO: 19.11.17 Schaden senden
                             syncronizedPlayer.status(3);
                             syncronizedPlayer.despawnSyncronizedPlayer(WorldSettings.EnumGamemode.NOT_SET);
                         }

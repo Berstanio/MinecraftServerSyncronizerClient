@@ -18,6 +18,8 @@ public class MyPlayer extends AbstractMessage {
     private int animation;
     private int status;
 
+    // TODO: 19.11.17 Potion Effect
+
     public MyPlayer(String name, Location location, HashMap<Integer, ItemStack> itemStackHashMap, float live, WorldSettings.EnumGamemode gamemode, int animation, int status) {
         setName(name);
         setLocation(location);

@@ -1,9 +1,10 @@
 package de.synchronizer.berstanio;
 
+import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
 @Serializable
-public class Disconnecter {
+public class Disconnecter extends AbstractMessage {
     private String name;
 
     public Disconnecter(String name){
