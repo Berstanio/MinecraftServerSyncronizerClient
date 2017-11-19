@@ -79,7 +79,6 @@ public class SyncronizedPlayer {
             status(myPlayer.getStatus());
         }
         teleport(myPlayer.getLocation());
-        // TODO: 11.11.17 Weiter!
         setLive(myPlayer.getLive());
         for (Integer integer : myPlayer.getItemStackHashMap().keySet()) {
             changeItems(integer, myPlayer.getItemStackHashMap().get(integer));

@@ -26,7 +26,6 @@ public class Main extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // TODO: 07.11.17 TESTEN!!!
-        // TODO: 18.11.17 Disconnect!
         if (command.getName().equalsIgnoreCase("start")) {
             if (sender.hasPermission("synchronizer.start")) {
                 if (args.length == 5){
